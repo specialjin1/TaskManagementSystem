@@ -12,6 +12,8 @@ public class Management extends JFrame {
 		addWindowListener(new JFrameWindowClosingEventHandler());
 		setVisible(true);
 		
+		JLabel taskName = new JLabel("°ϊΑ¦Έν");
+		
 	}
 	
 	static class JFrameWindowClosingEventHandler extends WindowAdapter {
