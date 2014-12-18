@@ -1,8 +1,8 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.util.Calendar;
+import javax.swing.*;
 
+import java.awt.*;
+import java.sql.*;
+import java.util.Vector;
 
 public class D_B_Object {
 	static private String taskName;
@@ -42,18 +42,17 @@ public class D_B_Object {
 			
 			// create the mysql insert preparedstatement
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
-			preparedStmt.setInt (1, primaryKey++);		// primaryKey
+			preparedStmt.setInt (1, primaryKey);		// primaryKey
 		    preparedStmt.setString (2, taskName);		// taskName
 		    preparedStmt.setInt (3, deadline);			// Deadline
-		    preparedStmt.setInt (4, imfortance);				// imfortance
-		    preparedStmt.setInt (5, estimatedTime);				// estimatedTime
+		    preparedStmt.setInt (4, imfortance);		// imfortance
+		    preparedStmt.setInt (5, estimatedTime);		// estimatedTime
 		    preparedStmt.setInt (6, (int)(System.currentTimeMillis()/1000));			// startTime
 			
 		    // execute the preparedstatement
 		    System.out.println(preparedStmt.execute());
-			
 		} catch (Exception e) {
-			System.out.println("Error : ");
+			
 		}
 	}
 	
@@ -63,5 +62,26 @@ public class D_B_Object {
 	
 	public static void Get_Query() {
 		// 데이터를 얻는 메소드
+		String myDriver = "org.gjt.mm.mysql.Driver";
+		String myUrl = "jdbc:mysql://localhost/TaskManagementSystem";
+		Vector data = new Vector();
+		Statement stmt = null;
+		ResultSet rs = null;
+		Connection conn = null;
+		try {
+			Class.forName(myDriver);
+			conn = DriverManager.getConnection(myUrl,"root","0000");
+			String sql = "select * from taskinfo by primaryKey asc";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				//int primaryKey = rs.getInt(primaryKey);
+				
+			}
+			
+		} catch(Exception e) {
+			
+		}
 	}
 }
